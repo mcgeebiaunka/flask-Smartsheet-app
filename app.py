@@ -1,12 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
 import smartsheet
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
-
 app = Flask(__name__)
+app.secret_key = "your_secret_key"  # Needed for flashing messages
 
 # 🔹 Initialize Smartsheet client
 ACCESS_TOKEN = os.getenv("SMARTSHEET_ACCESS_TOKEN")
@@ -119,7 +118,6 @@ FORMULA_COLUMNS = {"PO_BU", "ORDER_TOTAL", "STATUS", "CREATED", "UNIQUE_ID"}
 def index():
     return render_template('form.html')
 
-
 @app.route('/submit', methods=['POST'])
 def submit():
     form_data = request.form
@@ -144,7 +142,8 @@ def submit():
             if value:
                 row_cells.append({'column_id': col_id, 'value': value})
 
-
+    # 🔹 Default STATUS to "NEW" for each new row
+    row_cells.append({'column_id': 8367071570382724, 'value': "NEW"})
 
     # 🔹 Create and send row
     new_row = smartsheet.models.Row()
@@ -153,9 +152,11 @@ def submit():
 
     try:
         response = smartsheet_client.Sheets.add_rows(SHEET_ID, [new_row])
-        return "Form submitted successfully!"
+        flash("✅ Success! Your order request has been submitted.")
+        return redirect(url_for('index'))  # reload the form page
     except Exception as e:
-        return f"There was an error submitting the form: {e}"
+        flash(f"There was an error submitting the form: {e}")
+        return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
