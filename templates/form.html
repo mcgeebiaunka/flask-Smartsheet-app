@@ -1,237 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartsheet Order Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Left Column with Ascension Health branding */
-        .left-column {
-            width: 30%;
-            background: linear-gradient(135deg, #005EB8 0%, #0071CE 100%);
-            color: #ffffff;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-        .left-column .logo {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        .left-column .message {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        .left-column::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(255,255,255,0.05),
-                rgba(255,255,255,0.05) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-            pointer-events: none;
-        }
-
-        /* Right Column - Form Area */
-        .right-column {
-            width: 70%;
-            padding: 30px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            background-color: #f9f9f9;
-        }
-
-        /* Form Styling */
-        form {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Card-like form groups */
-        .form-group {
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-        .form-group h4 {
-            margin-top: 0;
-            color: #005EB8;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .form-group textarea {
-            height: 100px;
-        }
-
-        .form-group label {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smartsheet Order Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+    }
+.success-message {
+            color: green;
             font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
+            margin-bottom: 15px;
+            display: none;
         }
+    /* Left Column with Ascension Health branding */
+    .left-column {
+      width: 30%;
+      background: linear-gradient(135deg, #1d49cd 70%, #516bba 30%);
+      color: #ffffff;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .left-column .logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+    .left-column .message {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .left-column::before {
+      content: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.05),
+        rgba(255,255,255,0.05) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      pointer-events: none;
+    }
 
-        hr {
-            margin: 25px 0;
-            border: 1px solid #ccc;
-        }
+    /* Right Column - Form Area */
+    .right-column {
+      width: 70%;
+      padding: 30px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+    }
 
-        button {
-            background-color: #005EB8;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #0071CE;
-        }
+    form {
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-        /* Section headings */
-        h3 {
-            color: #005EB8;
-            margin-bottom: 10px;
-        }
-    </style>
+    .form-group {
+      margin-bottom: 20px;
+      padding: 15px 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .form-group h4 {
+      margin-top: 0;
+      color: #456bdf;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .form-group textarea {
+      height: 100px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    hr {
+      margin: 25px 0;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #365ccc;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #1A43BF;
+    }
+
+    h3 {
+      color: #123499;
+      margin-bottom: 10px;
+    }
+
+    .left-column a {
+      color: #3f105c;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-     <div class="left-column">
-    <h2 style="color:white; margin-bottom:20px;">Downtime Ordering Form</h2>
-    <p class="message" style="font-size:14px; line-height:1.6; text-align:left;">
-        In the event that PeopleSoft is not available, this form should be used to request ordering for items that should be processed to a Purchase Order.<br><br>
+  <div class="left-column">
+    <h2 style="color:white; margin-bottom:24px;">Downtime Ordering Form</h2>
+    <p class="message" style="font-size:16px; line-height:1.6; text-align:left;">
+      In the event that PeopleSoft is not available, this form should be used to request ordering for items that should be processed to a Purchase Order.<br><br>
 
-        If you are ordering more than five items from a Supplier, an Upload Template can be found
-        <a href="UPLOAD_TEMPLATE_LINK" target="_blank" style="color:white; text-decoration:underline;">HERE</a>.
-        Please upload completed sheet as an attachment in the Downtime Ordering Form.<br><br>
+      If you are placing a MEDLINE order please download form
+      <a href="https://docs.google.com/spreadsheets/d/12wHNxIG_vJTETGaQ12lpSN024pMTLD6TbPOV8emujpI/edit?usp=sharing" target="_blank">HERE</a>
+      and email it to:
+      <a href="mailto:purchasingforms@ascension.org">purchasingforms@ascension.org</a>.<br><br>
 
-        If you are placing a MEDLINE order please download form
-        <a href="MEDLINE_FORM_LINK" target="_blank" style="color:white; text-decoration:underline;">HERE</a>
-        and email it to:
-        <a href="mailto:purchasingforms@ascension.org" style="color:white; text-decoration:underline;">purchasingforms@ascension.org</a>.<br><br>
+      For Health Ministry location/GL information, item ordering information, or supplier account information, please see
+      <a href="https://docs.google.com/spreadsheets/d/15XdYOzKkFABawg70Z2JbRFuT_ycpam6D4XtCuXQCGSg/edit?usp=sharing" target="_blank">Downtime Toolkit</a>.<br><br>
 
-        For Health Ministry location/GL information, item ordering information, or supplier account information, please see
-        <a href="DOWNTIME_TOOLKIT_LINK" target="_blank" style="color:white; text-decoration:underline;">Downtime Toolkit</a>.<br><br>
-
-        If you have questions regarding this form, please click the
-        <a href="REQUESTER_SUPPORT_LINK" target="_blank" style="color:white; text-decoration:underline;">Requester Support Site</a>
-        link or call at 1-833-277-8724.
+      If you have questions regarding this form, please click the
+      <a href="https://gdaintranet.ascension.org/theresourcegroup/ls/content/6998698381248253/mdm/supply-chain-requester-support" target="_blank">Requester Support Site</a>
+      link or call at 1-833-277-8724.
     </p>
     <img src="ascension-logo.png" alt="Ascension Health Logo" class="logo">
-</div>
+  </div>
 
-    <div class="right-column">
+
+
+
+ <div class="right-column">
         <form id="orderForm" method="POST" action="/submit">
-
-            <!-- Priority at the top -->
-            <div class="form-group">
-                <label for="priority">PRIORITY</label>
-                <select id="priority" name="priority" required>
-                    <option value="Medium" selected>Medium</option>
-                    <option value="High">High</option>
-                    <option value="Low">Low</option>
-                </select>
+            <div class="success-message" id="successMessage">
+                Success! Your order request has been submitted.
             </div>
 
-            <hr>
-            <h3>Requester Information</h3>
-            <div class="form-group">
-                <label for="requester_name">REQUESTER NAME</label>
-                <input type="text" id="requester_name" name="requester_name" required>
-            </div>
+    <form id="orderForm" method="POST" action="/submit">
+      <!-- Priority -->
+      <div class="form-group">
+        <label for="priority">PRIORITY</label>
+        <select id="priority" name="priority" required>
+          <option value="Medium" selected>Medium</option>
+          <option value="High">High</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="requester_phone_number">REQUESTER PHONE NUMBER</label>
-                <input type="text" id="requester_phone_number" name="requester_phone_number" required>
-            </div>
+      <hr>
+      <h3>Requester Information</h3>
+      <div class="form-group">
+        <label for="requester_name">REQUESTER NAME</label>
+        <input type="text" id="requester_name" name="requester_name" required>
+      </div>
 
-            <div class="form-group">
-                <label for="email_address">EMAIL ADDRESS</label>
-                <input type="email" id="email_address" name="email_address" required>
-            </div>
+      <div class="form-group">
+        <label for="requester_phone_number">REQUESTER PHONE NUMBER</label>
+        <input type="text" id="requester_phone_number" name="requester_phone_number" required>
+      </div>
 
-            <div class="form-group">
-                <label for="ship_to_address">SHIP TO ADDRESS</label>
-                <input type="text" id="ship_to_address" name="ship_to_address" required>
-            </div>
+      <div class="form-group">
+        <label for="email_address">EMAIL ADDRESS</label>
+        <input type="email" id="email_address" name="email_address" required>
+      </div>
 
-            <div class="form-group">
-                <label for="city">CITY</label>
-                <input type="text" id="city" name="city" required>
-            </div>
+      <div class="form-group">
+        <label for="ship_to_address">SHIP TO ADDRESS</label>
+        <input type="text" id="ship_to_address" name="ship_to_address" required>
+      </div>
 
-            <div class="form-group">
-                <label for="state">STATE</label>
-                <select id="state" name="state" required>
-                    <option value="" disabled selected>Select State</option>
-                    <option>AL</option><option>IN</option><option>DC</option>
-                    <option>FL</option><option>GA</option><option>IL</option>
-                    <option>KS</option><option>KY</option><option>OH</option>
-                    <option>MD</option><option>MI</option><option>MO</option>
-                    <option>TX</option><option>TN</option><option>WI</option>
-                    <option>NY</option><option>LA</option><option>OK</option>
-                    <option>IA</option><option>AR</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="city">CITY</label>
+        <input type="text" id="city" name="city" required>
+      </div>
 
-            <div class="form-group">
-                <label for="zip">ZIP</label>
-                <input type="text" id="zip" name="zip" required>
-            </div>
+      <div class="form-group">
+        <label for="state">STATE</label>
+        <select id="state" name="state" required>
+          <option value="" disabled selected>Select State</option>
+          <option>AL</option><option>IN</option><option>DC</option>
+          <option>FL</option><option>GA</option><option>IL</option>
+          <option>KS</option><option>KY</option><option>OH</option>
+          <option>MD</option><option>MI</option><option>MO</option>
+          <option>TX</option><option>TN</option><option>WI</option>
+          <option>NY</option><option>LA</option><option>OK</option>
+          <option>IA</option><option>AR</option>
+        </select>
+      </div>
 
-            <div class="form-group">
-                <label for="health_ministry">HEALTH MINISTRY</label>
-                <select id="health_ministry" name="health_ministry" required>
-                    <option value="" disabled selected>Select Health Ministry</option>
-                    <option>ALBIR</option><option>CTBRI</option><option>DCWAS</option>
-                    <option>FLJAC</option><option>FLPEN</option><option>ILARL</option>
-                    <option>INEVA</option><option>ININD</option><option>KSWIC</option>
-                    <option>MDBAL</option><option>MIDET</option><option>MIGRA</option>
-                    <option>MIKAL</option><option>MIROC</option><option>MISAG</option>
-                    <option>MITAW</option><option>MOSTL</option><option>OKTUL</option>
-                    <option>TNNAS</option><option>TXAUS</option><option>TXWAC</option>
-                    <option>WIAPP</option><option>WIMIL</option>
-                </select>
-            </div>
+      <div class="form-group">
+        <label for="zip">ZIP</label>
+        <input type="text" id="zip" name="zip" required>
+      </div>
 
-            <div class="form-group">
-                <label for="po_bu_input">PO BU</label>
-                <input type="text" id="po_bu_input" name="po_bu_input" required>
-            </div>
+      <div class="form-group">
+        <label for="health_ministry">HEALTH MINISTRY</label>
+        <select id="health_ministry" name="health_ministry" required>
+          <option value="" disabled selected>Select Health Ministry</option>
+          <option>ALBIR</option><option>CTBRI</option><option>DCWAS</option>
+          <option>FLJAC</option><option>FLPEN</option><option>ILARL</option>
+          <option>INEVA</option><option>ININD</option><option>KSWIC</option>
+          <option>MDBAL</option><option>MIDET</option><option>MIGRA</option>
+          <option>MIKAL</option><option>MIROC</option><option>MISAG</option>
+          <option>MITAW</option><option>MOSTL</option><option>OKTUL</option>
+          <option>TNNAS</option><option>TXAUS</option><option>TXWAC</option>
+          <option>WIAPP</option><option>WIMIL</option>
+        </select>
+      </div>
 
-            <div class="form-group">
+      <div class="form-group">
+        <label for="po_bu_input">PO BU</label>
+        <select id="po_bu_input" name="po_bu_input" required>
+          <option value="" disabled selected>Select PO BU</option>
+        </select>
+      </div>
+ <div class="form-group">
                 <label for="ship_to_code">SHIP TO CODE</label>
                 <input type="text" id="ship_to_code" name="ship_to_code" required>
             </div>
@@ -250,134 +261,170 @@
                 <label for="department">DEPARTMENT</label>
                 <input type="text" id="department" name="department" required>
             </div>
+      <hr>
+      <h3>Supplier Information</h3>
+      <div class="form-group">
+        <label for="supplier_name">SUPPLIER NAME</label>
+        <input type="text" id="supplier_name" name="supplier_name" required>
+      </div>
 
-            <hr>
-            <h3>Supplier Information</h3>
-            <div class="form-group">
-                <label for="supplier_name">SUPPLIER NAME</label>
-                <input type="text" id="supplier_name" name="supplier_name" required>
-            </div>
+      <div class="form-group">
+        <label for="supplier_id">SUPPLIER ID</label>
+        <input type="text" id="supplier_id" name="supplier_id" required>
+      </div>
 
-            <div class="form-group">
-                <label for="supplier_id">SUPPLIER ID</label>
-                <input type="text" id="supplier_id" name="supplier_id" required>
-            </div>
+      <div class="form-group">
+        <label for="supplier_account">SUPPLIER ACCOUNT #</label>
+        <input type="text" id="supplier_account" name="supplier_account">
+      </div>
 
-            <div class="form-group">
-                <label for="supplier_account">SUPPLIER ACCOUNT #</label>
-                <input type="text" id="supplier_account" name="supplier_account" required>
-            </div>
+      <hr>
+      <div class="form-group">
+        <label for="order_lines_total">How many order lines do you need?</label>
+        <select id="order_lines_total" name="order_lines_total" required>
+          <option value="" disabled selected>Select number of lines</option>
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3">3</option><option value="4">4</option>
+          <option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option>
+          <option value="9">9</option><option value="10">10</option>
+          <option value="11">11</option><option value="12">12</option>
+          <option value="13">13</option><option value="14">14</option>
+          <option value="15">15</option><option value="16">16</option>
+          <option value="17">17</option><option value="18">18</option>
+          <option value="19">19</option><option value="20">20</option>
+        </select>
+      </div>
 
-            <hr>
-            <!-- Order Lines Total Dropdown -->
-            <div class="form-group">
-                <label for="order_lines_total">How many order lines do you need?</label>
-                <select id="order_lines_total" name="order_lines_total" required>
-    <option value="" disabled selected>Select number of lines</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-    <option value="13">13</option>
-    <option value="14">14</option>
-    <option value="15">15</option>
-    <option value="16">16</option>
-    <option value="17">17</option>
-    <option value="18">18</option>
-    <option value="19">19</option>
-    <option value="20">20</option>
-</select>
-            </div>
+      <div id="dynamic_order_lines"></div>
 
-            <div id="dynamic_order_lines"></div>
+      <hr>
+      <div class="form-group">
+        <label for="requester_comments">REQUESTER COMMENTS</label>
+        <textarea id="requester_comments" name="requester_comments"></textarea>
+      </div>
 
-            <hr>
-            <div class="form-group">
-                <label for="requester_comments">REQUESTER COMMENTS</label>
-                <textarea id="requester_comments" name="requester_comments" ></textarea>
-            </div>
-
-            <div class="form-group">
+        <div class="form-group">
                 <label for="attachment">Attachment</label>
                 <input type="file" id="attachment" name="attachment">
             </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
-   <script>
+<script>
+/* === Dynamic Order Lines (fixed ids/names) === */
 const orderLinesTotal = document.getElementById('order_lines_total');
 const dynamicContainer = document.getElementById('dynamic_order_lines');
 
 orderLinesTotal.addEventListener('change', () => {
-    const numLines = parseInt(orderLinesTotal.value);
-    dynamicContainer.innerHTML = ''; // clear previous lines
+  const numLines = parseInt(orderLinesTotal.value, 10);
+  dynamicContainer.innerHTML = '';
 
-    for (let i = 1; i <= numLines; i++) {
-        const div = document.createElement('div');
-        div.classList.add('form-group');
+  for (let i = 1; i <= numLines; i++) {
+    const div = document.createElement('div');
+    div.classList.add('form-group');
 
-        // Create collapsible header
-        const header = document.createElement('h4');
-        header.style.cursor = 'pointer';
-        header.style.display = 'flex';
-        header.style.justifyContent = 'space-between';
-        header.style.alignItems = 'center';
-        header.innerHTML = `Item ${i} <span style="font-size: 14px;">&#9660;</span>`;
+    const header = document.createElement('h4');
+    header.style.cursor = 'pointer';
+    header.style.display = 'flex';
+    header.style.justifyContent = 'space-between';
+    header.style.alignItems = 'center';
+    header.innerHTML = `Item ${i} <span style="font-size:14px;">&#9660;</span>`;
 
-        // Container for fields
-        const content = document.createElement('div');
-        content.innerHTML = `
-            <label for="item_${i}_item_id_ps">Item ID (PS #)</label>
-            <input type="text" id="item_${i}item_id_ps" name="item_${i}_item_id_ps">
+    const content = document.createElement('div');
+    content.innerHTML = `
+      <label for="item_${i}_item_id_ps">Item ID (PS #)</label>
+      <input type="text" id="item_${i}item_id_ps" name="item${i}_item_id_ps">
 
-            <label for="item_${i}_supplier_item_id">Supplier Item ID</label>
-            <input type="text" id="item_${i}supplier_item_id" name="item_${i}_supplier_item_id">
+      <label for="item_${i}_supplier_item_id">Supplier Item ID</label>
+      <input type="text" id="item_${i}supplier_item_id" name="item${i}_supplier_item_id">
 
-            <label for="item_${i}_in_unit">IN UNIT</label>
-            <input type="text" id="item_${i}_in_unit" name="item_${i}_in_unit">
+      <label for="item_${i}_in_unit">IN UNIT</label>
+      <input type="text" id="item_${i}in_unit" name="item${i}_in_unit">
 
-            <label for="item_${i}_serial_lot">Serial/Lot #</label>
-            <input type="text" id="item_${i}_serial_lot" name="item_${i}_serial_lot">
+      <label for="item_${i}_serial_lot">Serial/Lot #</label>
+      <input type="text" id="item_${i}serial_lot" name="item${i}_serial_lot">
 
-           <label for="item_${i}_item_description">Item Description</label>
-           <input type="text" id="item_${i}item_description" name="item_${i}_item_description">
+      <label for="item_${i}_item_description">Item Description</label>
+      <input type="text" id="item_${i}item_description" name="item${i}_item_description">
 
-           <label for="item_${i}_uom">UOM</label>
-           <input type="text" id="item_${i}_uom" name="item_${i}_uom">
+      <label for="item_${i}_uom">UOM</label>
+      <select id="item_${i}uom" name="item${i}_uom">
+        <option value="" disabled selected>Select UOM</option>
+        <option value="BX">BX</option>
+        <option value="EA">EA</option>
+        <option value="CS">CS</option>
+        <option value="PK">PK</option>
+      </select>
 
-           <label for="item_${i}_qty">QTY</label>
-           <input type="number" id="item_${i}_qty" name="item_${i}_qty">
+      <label for="item_${i}_qty">QTY</label>
+      <input type="number" id="item_${i}qty" name="item${i}_qty">
 
-           <label for="item_${i}_price">PRICE</label>
-           <input type="number" id="item_${i}_price" name="item_${i}_price">
-        `;
-        content.style.display = 'none'; // collapsed by default
-        content.style.marginTop = '10px';
+      <label for="item_${i}_price">PRICE</label>
+      <input type="number" id="item_${i}price" name="item${i}_price">
+    `;
+    content.style.display = 'none';
+    content.style.marginTop = '10px';
 
-        // Toggle functionality
-        header.addEventListener('click', () => {
-            if (content.style.display === 'none') {
-                content.style.display = 'block';
-                header.querySelector('span').innerHTML = '&#9650;'; // up arrow
-            } else {
-                content.style.display = 'none';
-                header.querySelector('span').innerHTML = '&#9660;'; // down arrow
-            }
+    header.addEventListener('click', () => {
+      const isHidden = content.style.display === 'none';
+      content.style.display = isHidden ? 'block' : 'none';
+      header.querySelector('span').innerHTML = isHidden ? '&#9650;' : '&#9660;';
+    });
+
+    div.appendChild(header);
+    div.appendChild(content);
+    dynamicContainer.appendChild(div);
+  }
+});
+
+
+
+
+
+
+/* === Health Ministry → PO BU Mapping === */
+const ministryPOBUs = {
+    "ALBIR": ["C0504","P0004","50531","50532","50535","50541","50542"],
+    "CTBRI": ["48514"],
+    "DCWAS": ["P0006","C0006","24005"],
+    "FLJAC": ["P0008","52005","C0008","52012","52009","52015"],
+    "FLPEN": ["26012","P0001","C0001","26013","26016","26042"],
+    "ILARL": ["C0035","66004","P0035","66008","66510","66511","66512","66513","66514","66520","66521","66522","66523","66201"],
+    "INEVA": ["C0010","40011","P0010","40017","40030"],
+    "ININD": ["P0011","46006","46013","46014","46018","C0011","46019","46024","46029","46033","46036","46042","46045","46046","46047","46048","46049","46055","46091"],
+    "KSWIC": ["P0032","C0032","68012","68076","68013","68022","68023"],
+    "MDBAL": ["C0012","32018","32022"],
+    "MIDET": ["C0013","P0013","34014","34015","34017","34023","34030","34031"],
+    "MIGRA": ["C0014","P0014","12018"],
+    "MIKAL": ["C0015","54005","P0015","54009","54020"],
+    "MIROC": ["73000","C0049","C0050"],
+    "MISAG": ["44005","44006","C0016"],
+    "MITAW": ["36003"],
+    "MOSTL": ["P0019","A0010","62003","62088","C0019"],
+    "OKTUL": ["C0033","P0033","72007","72010","72011","72012","72017","72029","72049"],
+    "TNNAS": ["P0003","C0003","28008","28012","28022","28029","28039","28040","28041","28042","28059"],
+    "TXAUS": ["30002","P0024","30003","C0024","30014","30017","30019","30020","30024","30049","30055","30061","30074","30078","30079"],
+    "TXWAC": ["20001","C0025","P0025","20002"],
+    "WIAPP": ["C0034","P0034","71139","71140","71142"],
+    "WIMIL": ["60005","C0027","P0027","60008","60017","74000","C0037","C0045","P0045","74002","P0039","C0039","P0043","74003","C0047","74004","C0044","P0044","P0037","74009","C0046","74010","74011","P0042","C0042","P0038","74027","C0041","74034"]
+};
+
+const healthMinistrySelect = document.getElementById("health_ministry");
+const poBUSelect = document.getElementById("po_bu_input");
+
+healthMinistrySelect.addEventListener("change", () => {
+    const selected = healthMinistrySelect.value;
+    poBUSelect.innerHTML = '<option value="" disabled selected>Select PO BU</option>';
+
+    if (ministryPOBUs[selected]) {
+        ministryPOBUs[selected].forEach(bu => {
+            const option = document.createElement("option");
+            option.value = bu;
+            option.textContent = bu;
+            poBUSelect.appendChild(option);
         });
-
-        div.appendChild(header);
-        div.appendChild(content);
-        dynamicContainer.appendChild(div);
     }
 });
 </script>
