@@ -137,7 +137,7 @@ def submit():
         if not item_info:
             continue
         for field_name, col_id in item_info.items():
-            form_field = f'item_{i}_{field_name.lower()}'
+            form_field = f'item{i}_{field_name.lower()}'  # ✅ FIX naming
             value = form_data.get(form_field)
             if value:
                 row_cells.append({'column_id': col_id, 'value': value})
