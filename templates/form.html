@@ -16,8 +16,10 @@
             color: green;
             font-weight: bold;
             margin-bottom: 15px;
-            display: none;
         }
+
+
+
     /* Left Column with Ascension Health branding */
     .left-column {
       width: 30%;
@@ -152,165 +154,175 @@
       <a href="https://gdaintranet.ascension.org/theresourcegroup/ls/content/6998698381248253/mdm/supply-chain-requester-support" target="_blank">Requester Support Site</a>
       link or call at 1-833-277-8724.
     </p>
-    <img src="ascension-logo.png" alt="Ascension Health Logo" class="logo">
+    <img src="{{ url_for('static', filename='ascension-logo.png') }}" alt="Ascension Health Logo" class="logo">
   </div>
 
 
-
-
- <div class="right-column">
-        <form id="orderForm" method="POST" action="/submit">
-            <div class="success-message" id="successMessage">
-                Success! Your order request has been submitted.
-            </div>
-
-    <form id="orderForm" method="POST" action="/submit">
-      <!-- Priority -->
-      <div class="form-group">
-        <label for="priority">PRIORITY</label>
-        <select id="priority" name="priority" required>
-          <option value="Medium" selected>Medium</option>
-          <option value="High">High</option>
-          <option value="Low">Low</option>
-        </select>
+<div class="right-column">
+  <!-- ✅ Flash success message -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="success-message" id="success-message">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
       </div>
+    {% endif %}
+  {% endwith %}
 
-      <hr>
-      <h3>Requester Information</h3>
-      <div class="form-group">
-        <label for="requester_name">REQUESTER NAME</label>
-        <input type="text" id="requester_name" name="requester_name" required>
-      </div>
+  <!-- ✅ The form -->
+  <form id="orderForm" method="POST" action="/submit">
+    <!-- Priority -->
+    <div class="form-group">
+      <label for="priority">PRIORITY</label>
+      <select id="priority" name="priority" required>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
 
-      <div class="form-group">
-        <label for="requester_phone_number">REQUESTER PHONE NUMBER</label>
-        <input type="text" id="requester_phone_number" name="requester_phone_number" required>
-      </div>
+    <hr>
+    <h3>Requester Information</h3>
+    <div class="form-group">
+      <label for="requester_name">REQUESTER NAME</label>
+      <input type="text" id="requester_name" name="requester_name" required>
+    </div>
 
-      <div class="form-group">
-        <label for="email_address">EMAIL ADDRESS</label>
-        <input type="email" id="email_address" name="email_address" required>
-      </div>
+    <div class="form-group">
+      <label for="requester_phone_number">REQUESTER PHONE NUMBER</label>
+      <input type="text" id="requester_phone_number" name="requester_phone_number" required>
+    </div>
 
-      <div class="form-group">
-        <label for="ship_to_address">SHIP TO ADDRESS</label>
-        <input type="text" id="ship_to_address" name="ship_to_address" required>
-      </div>
+    <div class="form-group">
+      <label for="email_address">EMAIL ADDRESS</label>
+      <input type="email" id="email_address" name="email_address" required>
+    </div>
 
-      <div class="form-group">
-        <label for="city">CITY</label>
-        <input type="text" id="city" name="city" required>
-      </div>
+    <div class="form-group">
+      <label for="ship_to_address">SHIP TO ADDRESS</label>
+      <input type="text" id="ship_to_address" name="ship_to_address" required>
+    </div>
 
-      <div class="form-group">
-        <label for="state">STATE</label>
-        <select id="state" name="state" required>
-          <option value="" disabled selected>Select State</option>
-          <option>AL</option><option>IN</option><option>DC</option>
-          <option>FL</option><option>GA</option><option>IL</option>
-          <option>KS</option><option>KY</option><option>OH</option>
-          <option>MD</option><option>MI</option><option>MO</option>
-          <option>TX</option><option>TN</option><option>WI</option>
-          <option>NY</option><option>LA</option><option>OK</option>
-          <option>IA</option><option>AR</option>
-        </select>
-      </div>
+    <div class="form-group">
+      <label for="city">CITY</label>
+      <input type="text" id="city" name="city" required>
+    </div>
 
-      <div class="form-group">
-        <label for="zip">ZIP</label>
-        <input type="text" id="zip" name="zip" required>
-      </div>
+    <div class="form-group">
+      <label for="state">STATE</label>
+      <select id="state" name="state" required>
+        <option value="" disabled selected>Select State</option>
+        <option>AL</option><option>IN</option><option>DC</option>
+        <option>FL</option><option>GA</option><option>IL</option>
+        <option>KS</option><option>KY</option><option>OH</option>
+        <option>MD</option><option>MI</option><option>MO</option>
+        <option>TX</option><option>TN</option><option>WI</option>
+        <option>NY</option><option>LA</option><option>OK</option>
+        <option>IA</option><option>AR</option>
+      </select>
+    </div>
 
-      <div class="form-group">
-        <label for="health_ministry">HEALTH MINISTRY</label>
-        <select id="health_ministry" name="health_ministry" required>
-          <option value="" disabled selected>Select Health Ministry</option>
-          <option>ALBIR</option><option>CTBRI</option><option>DCWAS</option>
-          <option>FLJAC</option><option>FLPEN</option><option>ILARL</option>
-          <option>INEVA</option><option>ININD</option><option>KSWIC</option>
-          <option>MDBAL</option><option>MIDET</option><option>MIGRA</option>
-          <option>MIKAL</option><option>MIROC</option><option>MISAG</option>
-          <option>MITAW</option><option>MOSTL</option><option>OKTUL</option>
-          <option>TNNAS</option><option>TXAUS</option><option>TXWAC</option>
-          <option>WIAPP</option><option>WIMIL</option>
-        </select>
-      </div>
+    <div class="form-group">
+      <label for="zip">ZIP</label>
+      <input type="text" id="zip" name="zip" required>
+    </div>
 
-      <div class="form-group">
-        <label for="po_bu_input">PO BU</label>
-        <select id="po_bu_input" name="po_bu_input" required>
-          <option value="" disabled selected>Select PO BU</option>
-        </select>
-      </div>
- <div class="form-group">
-                <label for="ship_to_code">SHIP TO CODE</label>
-                <input type="text" id="ship_to_code" name="ship_to_code" required>
-            </div>
+    <div class="form-group">
+      <label for="health_ministry">HEALTH MINISTRY</label>
+      <select id="health_ministry" name="health_ministry" required>
+        <option value="" disabled selected>Select Health Ministry</option>
+        <option>ALBIR</option><option>CTBRI</option><option>DCWAS</option>
+        <option>FLJAC</option><option>FLPEN</option><option>ILARL</option>
+        <option>INEVA</option><option>ININD</option><option>KSWIC</option>
+        <option>MDBAL</option><option>MIDET</option><option>MIGRA</option>
+        <option>MIKAL</option><option>MIROC</option><option>MISAG</option>
+        <option>MITAW</option><option>MOSTL</option><option>OKTUL</option>
+        <option>TNNAS</option><option>TXAUS</option><option>TXWAC</option>
+        <option>WIAPP</option><option>WIMIL</option>
+      </select>
+    </div>
 
-            <div class="form-group">
-                <label for="gl_unit">GL UNIT</label>
-                <input type="text" id="gl_unit" name="gl_unit" required>
-            </div>
+    <div class="form-group">
+      <label for="po_bu_input">PO BU</label>
+      <select id="po_bu_input" name="po_bu_input" required>
+        <option value="" disabled selected>Select PO BU</option>
+      </select>
+    </div>
 
-            <div class="form-group">
-                <label for="account_number">ACCOUNT NUMBER</label>
-                <input type="text" id="account_number" name="account_number" required>
-            </div>
+    <div class="form-group">
+      <label for="ship_to_code">SHIP TO CODE</label>
+      <input type="text" id="ship_to_code" name="ship_to_code" required>
+    </div>
 
-            <div class="form-group">
-                <label for="department">DEPARTMENT</label>
-                <input type="text" id="department" name="department" required>
-            </div>
-      <hr>
-      <h3>Supplier Information</h3>
-      <div class="form-group">
-        <label for="supplier_name">SUPPLIER NAME</label>
-        <input type="text" id="supplier_name" name="supplier_name" required>
-      </div>
+    <div class="form-group">
+      <label for="gl_unit">GL UNIT</label>
+      <input type="text" id="gl_unit" name="gl_unit" required>
+    </div>
 
-      <div class="form-group">
-        <label for="supplier_id">SUPPLIER ID</label>
-        <input type="text" id="supplier_id" name="supplier_id" required>
-      </div>
+    <div class="form-group">
+      <label for="account_number">ACCOUNT NUMBER</label>
+      <input type="text" id="account_number" name="account_number" required>
+    </div>
 
-      <div class="form-group">
-        <label for="supplier_account">SUPPLIER ACCOUNT #</label>
-        <input type="text" id="supplier_account" name="supplier_account">
-      </div>
+    <div class="form-group">
+      <label for="department">DEPARTMENT</label>
+      <input type="text" id="department" name="department" required>
+    </div>
 
-      <hr>
-      <div class="form-group">
-        <label for="order_lines_total">How many order lines do you need?</label>
-        <select id="order_lines_total" name="order_lines_total" required>
-          <option value="" disabled selected>Select number of lines</option>
-          <option value="1">1</option><option value="2">2</option>
-          <option value="3">3</option><option value="4">4</option>
-          <option value="5">5</option><option value="6">6</option>
-          <option value="7">7</option><option value="8">8</option>
-          <option value="9">9</option><option value="10">10</option>
-          <option value="11">11</option><option value="12">12</option>
-          <option value="13">13</option><option value="14">14</option>
-          <option value="15">15</option><option value="16">16</option>
-          <option value="17">17</option><option value="18">18</option>
-          <option value="19">19</option><option value="20">20</option>
-        </select>
-      </div>
+    <hr>
+    <h3>Supplier Information</h3>
+    <div class="form-group">
+      <label for="supplier_name">SUPPLIER NAME</label>
+      <input type="text" id="supplier_name" name="supplier_name" required>
+    </div>
 
-      <div id="dynamic_order_lines"></div>
+    <div class="form-group">
+      <label for="supplier_id">SUPPLIER ID</label>
+      <input type="text" id="supplier_id" name="supplier_id" required>
+    </div>
 
-      <hr>
-      <div class="form-group">
-        <label for="requester_comments">REQUESTER COMMENTS</label>
-        <textarea id="requester_comments" name="requester_comments"></textarea>
-      </div>
+    <div class="form-group">
+      <label for="supplier_account">SUPPLIER ACCOUNT #</label>
+      <input type="text" id="supplier_account" name="supplier_account">
+    </div>
 
-        <div class="form-group">
-                <label for="attachment">Attachment</label>
-                <input type="file" id="attachment" name="attachment">
-            </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+    <hr>
+    <div class="form-group">
+      <label for="order_lines_total">How many order lines do you need?</label>
+      <select id="order_lines_total" name="order_lines_total" required>
+        <option value="" disabled selected>Select number of lines</option>
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option>
+        <option value="5">5</option><option value="6">6</option>
+        <option value="7">7</option><option value="8">8</option>
+        <option value="9">9</option><option value="10">10</option>
+        <option value="11">11</option><option value="12">12</option>
+        <option value="13">13</option><option value="14">14</option>
+        <option value="15">15</option><option value="16">16</option>
+        <option value="17">17</option><option value="18">18</option>
+        <option value="19">19</option><option value="20">20</option>
+      </select>
+    </div>
+
+    <div id="dynamic_order_lines"></div>
+
+    <hr>
+    <div class="form-group">
+      <label for="requester_comments">REQUESTER COMMENTS</label>
+      <textarea id="requester_comments" name="requester_comments"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="attachment">Attachment</label>
+      <input type="file" id="attachment" name="attachment">
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+
 
 <script>
 /* === Dynamic Order Lines (fixed ids/names) === */
@@ -427,6 +439,18 @@ healthMinistrySelect.addEventListener("change", () => {
         });
     }
 });
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const msg = document.getElementById('success-message');
+    if (msg) {
+      setTimeout(() => {
+        msg.style.transition = "opacity 1s ease";
+        msg.style.opacity = "0";
+        setTimeout(() => msg.remove(), 1000);
+      }, 2000); // disappear after 2 seconds
+    }
+  });
 </script>
 </body>
 </html>
