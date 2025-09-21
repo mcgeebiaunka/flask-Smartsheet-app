@@ -346,35 +346,34 @@ orderLinesTotal.addEventListener('change', () => {
 
     const content = document.createElement('div');
     content.innerHTML = `
-      <label for="item_${i}_item_id_ps">Item ID (PS #)</label>
-      <input type="text" id="item_${i}item_id_ps" name="item${i}_item_id_ps">
+    <label for="item_${i}_item_id_ps">Item ID (PS #)</label>
+    <input type="text" id="item_${i}item_id_ps" name="item${i}_item_id_ps">
 
-      <label for="item_${i}_supplier_item_id">Supplier Item ID</label>
-      <input type="text" id="item_${i}supplier_item_id" name="item${i}_supplier_item_id">
+    <label for="item_${i}_supplier_item_id">Supplier Item ID</label>
+    <input type="text" id="item_${i}supplier_item_id" name="item${i}_supplier_item_id">
 
-      <label for="item_${i}_in_unit">IN UNIT</label>
-      <input type="text" id="item_${i}in_unit" name="item${i}_in_unit">
+    <label for="item_${i}_in_unit">IN UNIT</label>
+    <input type="text" id="item_${i}in_unit" name="item${i}_in_unit">
 
-      <label for="item_${i}_serial_lot">Serial/Lot #</label>
-      <input type="text" id="item_${i}serial_lot" name="item${i}_serial_lot">
+    <label for="item_${i}_serial_lot">Serial/Lot #</label>
+    <input type="text" id="item_${i}serial_lot" name="item${i}_serial_lot">
+    <label for="item_${i}_item_description">Item Description</label>
+    <input type="text" id="item_${i}item_description" name="item${i}_item_description">
 
-      <label for="item_${i}_item_description">Item Description</label>
-      <input type="text" id="item_${i}item_description" name="item${i}_item_description">
+    <label for="item_${i}_uom">UOM</label>
+    <select id="item_${i}uom" name="item${i}_uom">
+       <option value="" disabled selected>Select UOM</option>
+       <option value="BX">BX</option>
+       <option value="EA">EA</option>
+       <option value="CS">CS</option>
+       <option value="PK">PK</option>
+    </select>
 
-      <label for="item_${i}_uom">UOM</label>
-      <select id="item_${i}uom" name="item${i}_uom">
-        <option value="" disabled selected>Select UOM</option>
-        <option value="BX">BX</option>
-        <option value="EA">EA</option>
-        <option value="CS">CS</option>
-        <option value="PK">PK</option>
-      </select>
+    <label for="item_${i}_qty">QTY</label>
+    <input type="number" id="item_${i}qty" name="item${i}_qty">
 
-      <label for="item_${i}_qty">QTY</label>
-      <input type="number" id="item_${i}qty" name="item${i}_qty">
-
-      <label for="item_${i}_price">PRICE</label>
-      <input type="number" id="item_${i}price" name="item${i}_price">
+    <label for="item_${i}_price">PRICE</label>
+    <input type="number" id="item_${i}price" name="item${i}_price">
     `;
     content.style.display = 'none';
     content.style.marginTop = '10px';
@@ -448,7 +447,7 @@ healthMinistrySelect.addEventListener("change", () => {
         msg.style.transition = "opacity 1s ease";
         msg.style.opacity = "0";
         setTimeout(() => msg.remove(), 1000);
-      }, 2000); // disappear after 2 seconds
+      }, 1000); // disappear after 1 seconds
     }
   });
 </script>
