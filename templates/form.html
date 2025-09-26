@@ -142,13 +142,11 @@
     <p class="message" style="font-size:16px; line-height:1.6; text-align:left;">
       In the event that PeopleSoft is not available, this form should be used to request ordering for items that should be processed to a Purchase Order.<br><br>
 
-      If you are placing a MEDLINE order please download form
-      <a href="https://docs.google.com/spreadsheets/d/12wHNxIG_vJTETGaQ12lpSN024pMTLD6TbPOV8emujpI/edit?usp=sharing" target="_blank">HERE</a>
-      and email it to:
-      <a href="mailto:purchasingforms@ascension.org">purchasingforms@ascension.org</a>.<br><br>
+      If you are placing a MEDLINE order use the Medline Downtime Order form
+      <a href="https://app.smartsheet.com/b/form/56beda608f2a4483a2160ab50d367544" target="_blank">HERE</a><br><br>
 
       For Health Ministry location/GL information, item ordering information, or supplier account information, please see
-      <a href="https://docs.google.com/spreadsheets/d/15XdYOzKkFABawg70Z2JbRFuT_ycpam6D4XtCuXQCGSg/edit?usp=sharing" target="_blank">Downtime Toolkit</a>.<br><br>
+      <a href="https://docs.google.com/spreadsheets/d/15XdYOzKkFABawg70Z2JbRFuT_ycpam6D4XtCuXQCGSg/edit?gid=1318666848#gid=1318666848" target="_blank">Downtime Toolkit</a>.<br><br>
 
       If you have questions regarding this form, please click the
       <a href="https://gdaintranet.ascension.org/theresourcegroup/ls/content/6998698381248253/mdm/supply-chain-requester-support" target="_blank">Requester Support Site</a>
@@ -177,8 +175,10 @@
       <label for="priority">PRIORITY</label>
       <select id="priority" name="priority" required>
         <option value="Medium" selected>Medium</option>
-        <option value="High">High</option>
-        <option value="Low">Low</option>
+        <option value="HIGH- Next Day 8:30 AM">HIGH- Next Day 8:30 AM</option>
+        <option value="HIGH- Next Day 10:30 AM">HIGH- Next Day 10:30 AM</option>
+        <option value="HIGH- Next Day End of Day">HIGH- Next Day End of Day</option>
+        <option value="HIGH- Second Day End of Day">HIGH- Second Day End of Day</option>
       </select>
     </div>
 
@@ -307,6 +307,11 @@
 
     <div id="dynamic_order_lines"></div>
 
+       <div class="form-group">
+  <label for="grand_total">TOTAL AMOUNT</label>
+  <input type="number" id="grand_total" name="total_amount" readonly>
+</div>
+
     <hr>
     <div class="form-group">
       <label for="requester_comments">REQUESTER COMMENTS</label>
@@ -317,6 +322,8 @@
       <label for="attachment">Attachment</label>
       <input type="file" id="attachment" name="attachment">
     </div>
+
+
 
     <button type="submit">Submit</button>
   </form>
@@ -363,21 +370,36 @@ orderLinesTotal.addEventListener('change', () => {
     <label for="item_${i}_uom">UOM</label>
     <select id="item_${i}uom" name="item${i}_uom">
        <option value="" disabled selected>Select UOM</option>
-       <option value="BX">BX</option>
+        <option value="BX">BX</option>
        <option value="EA">EA</option>
        <option value="CS">CS</option>
+       <option value="CT">CT</option>
+       <option value="PC">PC</option>
+       <option value="PD">PD</option>
        <option value="PK">PK</option>
+       <option value="PR">PR</option>
+       <option value="BG">BG</option>
+       <option value="BO">BO</option>
+       <option value="ST">ST</option>
+       <option value="SL">SL</option>
+       <option value="TY">TY</option>
+       <option value="V2">V2</option>
+       <option value="RL">RL</option>
     </select>
 
     <label for="item_${i}_qty">QTY</label>
     <input type="number" id="item_${i}qty" name="item${i}_qty">
 
     <label for="item_${i}_price">PRICE</label>
-    <input type="number" id="item_${i}price" name="item${i}_price">
+    <input type="number" id="item_${i}price" name="item${i}_price" step="0.01">
+
+    <label for="item_${i}_total"> ITEM TOTAL</label>
+    <input type="number" id="item_${i}total" name="item${i}_total" readonly>
     `;
     content.style.display = 'none';
     content.style.marginTop = '10px';
 
+    //toggle expand/collapse
     header.addEventListener('click', () => {
       const isHidden = content.style.display === 'none';
       content.style.display = isHidden ? 'block' : 'none';
@@ -387,12 +409,39 @@ orderLinesTotal.addEventListener('change', () => {
     div.appendChild(header);
     div.appendChild(content);
     dynamicContainer.appendChild(div);
+
   }
+
 });
 
+/* === Event Delegation for Calculations === */
+dynamicContainer.addEventListener('input', (e) => {
+  if (e.target.id.includes('qty') || e.target.id.includes('price')) {
+    const i = e.target.id.match(/\d+/)[0]; // find item number
 
+    const qty = document.getElementById(`item_${i}qty`);
+    const price = document.getElementById(`item_${i}price`);
+    const total = document.getElementById(`item_${i}total`);
+    const grandTotal = document.getElementById('grand_total');
 
+    const q = parseFloat(qty.value);
+    const p = parseFloat(price.value);
 
+     // ✅ If both qty & price are blank, clear the total
+    if ((!qty.value || qty.value.trim() === "") && (!price.value || price.value.trim() === "")) {
+      total.value = "";
+    } else {
+      total.value = ( (q || 0) * (p || 0) ).toFixed(2);
+    }
+
+    // recalc grand total
+    let sum = 0;
+    document.querySelectorAll('[id^="item"][id$="total"]').forEach(el => {
+      sum += parseFloat(el.value) || 0;
+    });
+    grandTotal.value = sum.toFixed(2);
+  }
+});
 
 
 /* === Health Ministry → PO BU Mapping === */
